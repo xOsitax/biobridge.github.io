@@ -281,7 +281,6 @@
     <main>
       <section class="container hero">
         <div>
-          <span class="tag">Student project · Research-informed prototype</span>
           <h2>Secure login without password overload.</h2>
           <p>
             BioBridge explores how a browser extension could combine biometric
@@ -310,10 +309,6 @@
           <div class="card">
             <div class="stat-value" id="prefer-percent">--</div>
             <div class="stat-label">Prefer biometrics</div>
-          </div>
-          <div class="card">
-            <div class="stat-value" id="trust-percent">--</div>
-            <div class="stat-label">Trust extension</div>
           </div>
         </div>
       </section>
@@ -582,15 +577,14 @@
           const data = parseCSV(csvText);
           const total = data.length;
 
-          // IMPORTANT:
-          // Replace these with your exact Google Form question titles if needed
           const reuseColumn =
             "Do you reuse the same password across multiple accounts?";
           const biometricColumn =
             "Have you used biometric login (fingerprint or face ID)?";
           const preferColumn =
             "Would you prefer using biometrics instead of passwords to log into websites?";
-
+          const trustColumn =
+            "A browser extension is a small tool added to your browser that helps manage tasks. In this case, it would securely store and autofill login credentials after biometric authentication (e.g., fingerprint or face ID). Would you trust a browser extension to manage secure login?";
           const reuseCount = data.filter((row) =>
             ["yes", "sometimes"].includes(
               (row[reuseColumn] || "").toLowerCase()
