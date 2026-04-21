@@ -583,10 +583,10 @@
               (row[reuseColumn] || "").toLowerCase()
             )
           ).length;
-
-          const biometricCount = data.filter(
-            (row) => (row[biometricColumn] || "").toLowerCase() === "yes"
-          ).length;
+          const biometricCount = data.filter((row) => {
+            const value = (row[biometricColumn] || "").trim().toLowerCase();
+            return value === "yes";
+          }).length;
 
           const preferCount = data.filter(
             (row) => (row[preferColumn] || "").toLowerCase() === "yes"
