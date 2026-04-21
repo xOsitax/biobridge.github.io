@@ -442,12 +442,7 @@
             </div>
 
             <div class="bar-item">
-              <div class="bar-top">
-                <span>Respondents who trust the extension</span
-                ><span id="trust-bar-label">--</span>
-              </div>
-              <div class="bar-bg">
-                <div class="bar-fill" id="trust-bar" style="width: 0%"></div>
+   
               </div>
             </div>
           </div>
@@ -577,6 +572,8 @@
           const data = parseCSV(csvText);
           const total = data.length;
 
+          console.log("Headers:", Object.keys(data[0] || {}));
+
           const reuseColumn =
             "Do you reuse the same password across multiple accounts?";
           const biometricColumn =
@@ -585,6 +582,7 @@
             "Would you prefer using biometrics instead of passwords to log into websites?";
           const trustColumn =
             "A browser extension is a small tool added to your browser that helps manage tasks. In this case, it would securely store and autofill login credentials after biometric authentication (e.g., fingerprint or face ID). Would you trust a browser extension to manage secure login?";
+
           const reuseCount = data.filter((row) =>
             ["yes", "sometimes"].includes(
               (row[reuseColumn] || "").toLowerCase()
@@ -599,35 +597,40 @@
             (row) => (row[preferColumn] || "").toLowerCase() === "yes"
           ).length;
 
-          const trustCount = data.filter(
-            (row) => (row[trustColumn] || "").toLowerCase() === "yes"
-          ).length;
+          const trustCount = data.filter((row) => {
+            const value = (row[trustColumn] || "").toLowerCase();
+            return value === "yes" || value === "maybe";
+          }).length;
 
           const reusePct = percent(reuseCount, total);
           const biometricPct = percent(biometricCount, total);
           const preferPct = percent(preferCount, total);
           const trustPct = percent(trustCount, total);
 
-          document.getElementById("reuse-percent").textContent = reusePct;
-          document.getElementById("biometric-percent").textContent =
-            biometricPct;
-          document.getElementById("prefer-percent").textContent = preferPct;
-          document.getElementById("trust-percent").textContent = trustPct;
+          const setText = (id, value) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value;
+          };
 
-          document.getElementById("reuse-bar-label").textContent = reusePct;
-          document.getElementById("biometric-bar-label").textContent =
-            biometricPct;
-          document.getElementById("prefer-bar-label").textContent = preferPct;
-          document.getElementById("trust-bar-label").textContent = trustPct;
+          const setWidth = (id, value) => {
+            const el = document.getElementById(id);
+            if (el) el.style.width = value + "%";
+          };
 
-          document.getElementById("reuse-bar").style.width =
-            numericPercent(reuseCount, total) + "%";
-          document.getElementById("biometric-bar").style.width =
-            numericPercent(biometricCount, total) + "%";
-          document.getElementById("prefer-bar").style.width =
-            numericPercent(preferCount, total) + "%";
-          document.getElementById("trust-bar").style.width =
-            numericPercent(trustCount, total) + "%";
+          setText("reuse-percent", reusePct);
+          setText("biometric-percent", biometricPct);
+          setText("prefer-percent", preferPct);
+          setText("trust-percent", trustPct);
+
+          setText("reuse-bar-label", reusePct);
+          setText("biometric-bar-label", biometricPct);
+          setText("prefer-bar-label", preferPct);
+          setText("trust-bar-label", trustPct);
+
+          setWidth("reuse-bar", numericPercent(reuseCount, total));
+          setWidth("biometric-bar", numericPercent(biometricCount, total));
+          setWidth("prefer-bar", numericPercent(preferCount, total));
+          setWidth("trust-bar", numericPercent(trustCount, total));
         })
         .catch((error) => {
           console.error("Failed to load survey data:", error);
