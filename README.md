@@ -47,61 +47,13 @@ The Chrome Web Store publication process may take several days because extension
 10. Pin the extension using the puzzle icon in the Chrome toolbar.
 11. Click the BioBridge icon to test the extension.
 
-## Screenshot Placeholders
 
-Use the following images to document the manual installation process:
-
-![Step 1 - Download ZIP](images/download-zip.png)
-
-![Step 2 - Extract Folder](images/extract-folder.png)
-
-![Step 3 - Chrome Extensions Page](images/chrome-extensions.png)
-
-![Step 4 - Enable Developer Mode](images/developer-mode.png)
-
-![Step 5 - Load Unpacked](images/load-unpacked.png)
-
-![Step 6 - Select Folder](images/select-folder.png)
-
-![Step 7 - Extension Loaded](images/extension-loaded.png)
-
-![Step 8 - BioBridge Popup](images/biobridge-popup.png)
-
-## Troubleshooting
-
-### "Manifest file is missing or unreadable"
-
-**Fix:** Make sure you select the folder that directly contains `manifest.json`. Do not select the parent folder if `manifest.json` is inside another nested folder.
 
 ### Extension does not appear
 
 **Fix:** Refresh `chrome://extensions`, then try loading the unpacked extension again. You can also click the reload icon on the BioBridge extension card.
 
-### Popup does not open
 
-**Fix:** Check for extension errors on `chrome://extensions`. Reload the extension, then click the BioBridge icon again.
-
-### Buttons do not work
-
-**Fix:** Make sure all JavaScript files are included in the extension folder. Reload the unpacked extension after confirming the files are present.
-
-## Project Structure
-
-Example project structure:
-
-```text
-BioBridge/
-├── manifest.json
-├── popup.html
-├── popup.css
-├── popup.js
-├── background.js
-├── content.js
-├── icons/
-└── images/
-```
-
-Depending on the final repository organization, files may also be grouped into folders such as `popup/`, `background/`, `content/`, and `assets/`.
 
 ## Companion Website
 
