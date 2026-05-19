@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BioBridge — Authenticate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+  <div class="auth-card" id="card">
+
+    <!-- SCREEN: BIOMETRIC AUTH -->
+    <div id="screen-bio" class="screen active">
+      <div class="shield" id="shield-icon">
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+          <path d="M24 4L6 12v12c0 11.1 7.68 21.48 18 24 10.32-2.52 18-12.9 18-24V12L24 4z" stroke="currentColor" stroke-width="2" fill="none"/>
+          <rect x="18" y="20" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M20 20v-3a4 4 0 118 0v3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="24" cy="25.5" r="1.5" fill="currentColor"/>
+        </svg>
+      </div>
+      <h1 id="bio-title">BioBridge Authentication</h1>
+      <p class="subtitle" id="bio-subtitle">Use your fingerprint or face to unlock your vault</p>
+
+      <button class="btn btn-primary" id="btn-auth">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 11c0-1.1-.9-2-2-2s-2 .9-2 2m-1-5a7 7 0 0110 0m-3 5a4 4 0 00-8 0m4 4v3"/></svg>
+        Authenticate with Biometrics
+      </button>
+
+      <div id="bio-status" class="status hidden"></div>
+
+      <!-- Recovery option shows after failure -->
+      <div id="recovery-option" class="hidden">
+        <div class="divider"><span>biometric not working?</span></div>
+        <button class="btn btn-outline" id="btn-show-recovery">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+          Recover via Email OTP
+        </button>
+      </div>
+    </div>
+
+    <!-- SCREEN: EMAIL RECOVERY -->
+    <div id="screen-recovery" class="screen">
+      <button class="btn-back" id="btn-back-to-bio">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Biometric
+      </button>
+
+      <div class="shield recovery-shield">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/>
+        </svg>
+      </div>
+      <h1>Email Recovery</h1>
+      <p class="subtitle" id="recovery-subtitle">A 6-digit code will be sent to your recovery email</p>
+
+      <!-- Step 1: Send OTP -->
+      <div id="recovery-step1">
+        <button class="btn btn-primary" id="btn-send-otp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Send Recovery Code
+        </button>
+      </div>
+
+      <!-- Step 2: Enter OTP -->
+      <div id="recovery-step2" class="hidden">
+        <p class="otp-sent-msg">Code sent to <strong id="masked-email"></strong></p>
+        <div class="otp-group">
+          <input type="text" maxlength="1" class="otp-box" data-index="0" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-box" data-index="1" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-box" data-index="2" inputmode="numeric">
+          <div class="otp-sep">—</div>
+          <input type="text" maxlength="1" class="otp-box" data-index="3" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-box" data-index="4" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-box" data-index="5" inputmode="numeric">
+        </div>
+        <button class="btn btn-primary" id="btn-verify-otp">Verify Code</button>
+        <div class="otp-meta">
+          <span>Expires in <strong id="otp-timer">5:00</strong></span>
+          <span>Attempts: <strong id="otp-attempts">0</strong>/3</span>
+        </div>
+      </div>
+
+      <div id="recovery-status" class="status hidden"></div>
+    </div>
+
+    <!-- SCREEN: SUCCESS -->
+    <div id="screen-success" class="screen">
+      <div class="shield success-shield">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h1>Vault Unlocked</h1>
+      <p class="subtitle">You can now close this tab and use BioBridge from the toolbar icon.</p>
+      <div class="status status-ok">Authentication successful — your vault is ready</div>
+      <button class="btn btn-outline" id="btn-close">Close this tab</button>
+      <p class="closing-msg" id="closing-msg">This tab will close automatically in 3 seconds...</p>
+    </div>
+
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
