@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BioBridge</title>
+
     <style>
       * {
         box-sizing: border-box;
@@ -69,17 +70,6 @@
         align-items: center;
       }
 
-      .tag {
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(34, 211, 238, 0.3);
-        background: rgba(34, 211, 238, 0.08);
-        color: #67e8f9;
-        font-size: 12px;
-        margin-bottom: 18px;
-      }
-
       .hero h2 {
         font-size: 54px;
         line-height: 1.05;
@@ -129,6 +119,7 @@
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 24px;
         padding: 24px;
+        margin-bottom: 20px;
       }
 
       .stat-value {
@@ -210,6 +201,7 @@
         height: 100%;
         background: #22d3ee;
         border-radius: 999px;
+        transition: width 0.5s ease;
       }
 
       .report-box {
@@ -262,6 +254,7 @@
       }
     </style>
   </head>
+
   <body>
     <header>
       <div class="container nav">
@@ -269,6 +262,7 @@
           <h1>BioBridge</h1>
           <p>Biometric authentication for legacy web portals</p>
         </div>
+
         <nav class="nav-links">
           <a href="#problem">Problem</a>
           <a href="#research">Research</a>
@@ -288,6 +282,7 @@
             authentication, local credential protection, and transparent user
             education to improve login security and usability.
           </p>
+
           <div class="btn-group">
             <a class="btn btn-primary" href="#research"
               >Read the research summary</a
@@ -303,13 +298,20 @@
             <div class="stat-value" id="reuse-percent">--</div>
             <div class="stat-label">Reuse passwords</div>
           </div>
+
           <div class="card">
             <div class="stat-value" id="biometric-percent">--</div>
             <div class="stat-label">Use biometrics</div>
           </div>
+
           <div class="card">
             <div class="stat-value" id="prefer-percent">--</div>
             <div class="stat-label">Prefer biometrics</div>
+          </div>
+
+          <div class="card">
+            <div class="stat-value" id="tester-flow-percent">--</div>
+            <div class="stat-label">Tester flow clarity</div>
           </div>
         </div>
       </section>
@@ -321,20 +323,15 @@
             <p>
               BioBridge is a browser extension concept designed to reduce
               password fatigue by connecting biometric authentication with
-              traditional website logins. Instead of asking users to remember
-              and type many passwords, BioBridge aims to support secure login
-              through device-based biometrics and local credential protection.
+              traditional website logins.
             </p>
           </article>
 
           <article class="card">
             <h3>The Problem</h3>
             <p>
-              Modern users manage many online accounts, and this often leads to
-              password reuse, weak password habits, and login frustration. Our
-              survey results and background research both suggest that
-              convenience and security are still difficult to balance in
-              everyday authentication.
+              Modern users manage many online accounts, which can lead to
+              password reuse, weak password habits, and login frustration.
             </p>
           </article>
 
@@ -342,19 +339,15 @@
             <h3>Research Background</h3>
             <p>
               Our literature review focuses on password reuse, usability
-              problems in password-based authentication, the growth of
-              biometrics such as fingerprint and face authentication, and the
-              importance of privacy-by-design in browser-based security tools.
+              problems, biometric authentication, and privacy-by-design.
             </p>
           </article>
 
           <article class="card">
             <h3>Prototype Direction</h3>
             <p>
-              We developed a low-fidelity prototype in Figma and a working
-              Chrome extension prototype to simulate the login flow. The
-              prototype includes login detection, biometric verification flow,
-              success states, and a fallback path for unsupported situations.
+              We developed a Figma prototype and a Chrome extension prototype to
+              simulate the login flow.
             </p>
           </article>
         </div>
@@ -363,9 +356,8 @@
       <section id="research" class="container">
         <h2 class="section-title">Research themes</h2>
         <p class="section-intro">
-          This website is intended to function as a companion transparency page
-          for the BioBridge extension. It explains the reasoning behind the
-          design and summarizes the literature review in a user-friendly way.
+          This website functions as a companion transparency page for the
+          BioBridge extension and summarizes the reasoning behind the design.
         </p>
 
         <div class="grid-3">
@@ -376,13 +368,15 @@
               is compromised.
             </p>
           </div>
+
           <div class="card">
             <h4>Biometric convenience</h4>
             <p>
-              Biometric systems reduce memory burden and can improve the speed
-              of authentication.
+              Biometric systems reduce memory burden and can improve
+              authentication speed.
             </p>
           </div>
+
           <div class="card">
             <h4>Privacy by design</h4>
             <p>
@@ -394,55 +388,111 @@
       </section>
 
       <section id="survey" class="container">
-        <div class="grid-2">
-          <div class="card">
-            <h2
-              class="section-title"
-              style="font-size: 32px; margin-bottom: 12px"
-            >
-              Survey findings
-            </h2>
-            <p class="section-intro" style="margin-bottom: 24px">
-              Early survey responses showed that password reuse and login
-              frustration remain common, while biometric authentication is
-              already familiar to many users.
-            </p>
+        <div class="card">
+          <h2 class="section-title" style="font-size: 32px">
+            Original Survey Findings
+          </h2>
+          <p class="section-intro">
+            Early survey responses showed that password reuse and login
+            frustration remain common, while biometric authentication is already
+            familiar to many users.
+          </p>
 
-            <div class="bar-item">
-              <div class="bar-top">
-                <span>Respondents who reuse passwords</span
-                ><span id="reuse-bar-label">--</span>
-              </div>
-              <div class="bar-bg">
-                <div class="bar-fill" id="reuse-bar" style="width: 0%"></div>
-              </div>
+          <div class="bar-item">
+            <div class="bar-top">
+              <span>Respondents who reuse passwords</span>
+              <span id="reuse-bar-label">--</span>
             </div>
-
-            <div class="bar-item">
-              <div class="bar-top">
-                <span>Respondents who already use biometrics</span
-                ><span id="biometric-bar-label">--</span>
-              </div>
-              <div class="bar-bg">
-                <div
-                  class="bar-fill"
-                  id="biometric-bar"
-                  style="width: 0%"
-                ></div>
-              </div>
+            <div class="bar-bg">
+              <div class="bar-fill" id="reuse-bar" style="width: 0%"></div>
             </div>
+          </div>
 
-            <div class="bar-item">
-              <div class="bar-top">
-                <span>Respondents who prefer biometrics over passwords</span
-                ><span id="prefer-bar-label">--</span>
-              </div>
-              <div class="bar-bg">
-                <div class="bar-fill" id="prefer-bar" style="width: 0%"></div>
-              </div>
+          <div class="bar-item">
+            <div class="bar-top">
+              <span>Respondents who already use biometrics</span>
+              <span id="biometric-bar-label">--</span>
             </div>
+            <div class="bar-bg">
+              <div class="bar-fill" id="biometric-bar" style="width: 0%"></div>
+            </div>
+          </div>
 
-            <div class="bar-item"></div>
+          <div class="bar-item">
+            <div class="bar-top">
+              <span>Respondents who prefer biometrics over passwords</span>
+              <span id="prefer-bar-label">--</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" id="prefer-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title" style="font-size: 32px">
+            Tester Feedback Survey
+          </h2>
+          <p class="section-intro">
+            Tester feedback focuses on how easy the extension was to access, how
+            clear the interface felt, and whether users trusted the biometric
+            login explanation.
+          </p>
+
+          <div class="bar-item">
+            <div class="bar-top">
+              <span>Extension was easy to load/access</span>
+              <span id="tester-easy-label">--</span>
+            </div>
+            <div class="bar-bg">
+              <div
+                class="bar-fill"
+                id="tester-easy-bar"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="bar-item">
+            <div class="bar-top">
+              <span>Interface looked professional</span>
+              <span id="tester-professional-label">--</span>
+            </div>
+            <div class="bar-bg">
+              <div
+                class="bar-fill"
+                id="tester-professional-bar"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="bar-item">
+            <div class="bar-top">
+              <span>Authentication flow was clear</span>
+              <span id="tester-flow-label">--</span>
+            </div>
+            <div class="bar-bg">
+              <div
+                class="bar-fill"
+                id="tester-flow-bar"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="bar-item">
+            <div class="bar-top">
+              <span>Trust improves with biometric explanation</span>
+              <span id="tester-trust-label">--</span>
+            </div>
+            <div class="bar-bg">
+              <div
+                class="bar-fill"
+                id="tester-trust-bar"
+                style="width: 0%"
+              ></div>
+            </div>
           </div>
         </div>
 
@@ -461,8 +511,7 @@
         <h2 class="section-title">Prototype features</h2>
         <p class="section-intro">
           The BioBridge concept includes an extension popup, biometric
-          verification flow, secure credential handling, and a fallback option
-          for unsupported devices or failed verification.
+          verification flow, secure credential handling, and a fallback option.
         </p>
 
         <div class="grid-2">
@@ -503,9 +552,11 @@
     </footer>
 
     <script>
-      const csvUrl =
+      const originalSurveyUrl =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7bVjbdPix8Lqnm6qxrLHFWDCCGum3KJx4CpRFyIR98-4GApJQ401T8ZUzxFiuF00kJHFmPjVLA030/pub?output=csv";
 
+      const testerSurveyUrl =
+        "https://docs.google.com/spreadsheets/d/1AxYObVlgvk6QMnvpl8Lg3Vax71BDDo2lZpcQMAm6Kbg/export?format=csv&gid=378907139";
       function parseCSVLine(line) {
         const result = [];
         let current = "";
@@ -562,13 +613,21 @@
         return (count / total) * 100;
       }
 
-      fetch(csvUrl)
+      function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      function setWidth(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.style.width = value + "%";
+      }
+
+      fetch(originalSurveyUrl)
         .then((response) => response.text())
         .then((csvText) => {
           const data = parseCSV(csvText);
           const total = data.length;
-
-          console.log("Headers:", Object.keys(data[0] || {}));
 
           const reuseColumn =
             "Do you reuse the same password across multiple accounts?";
@@ -576,60 +635,96 @@
             "Have you used biometric login (fingerprint or face ID)?";
           const preferColumn =
             "Would you prefer using biometrics instead of passwords to log into websites?";
-          const trustColumn =
-            "A browser extension is a small tool added to your browser that helps manage tasks. In this case, it would securely store and autofill login credentials after biometric authentication (e.g., fingerprint or face ID). Would you trust a browser extension to manage secure login?";
 
           const reuseCount = data.filter((row) =>
             ["yes", "sometimes"].includes(
               (row[reuseColumn] || "").toLowerCase()
             )
           ).length;
-          const biometricCount = data.filter((row) => {
-            const value = (row[biometricColumn] || "").trim().toLowerCase();
-            return value === "yes";
-          }).length;
+
+          const biometricCount = data.filter(
+            (row) => (row[biometricColumn] || "").toLowerCase() === "yes"
+          ).length;
 
           const preferCount = data.filter(
             (row) => (row[preferColumn] || "").toLowerCase() === "yes"
           ).length;
 
-          const trustCount = data.filter((row) => {
-            const value = (row[trustColumn] || "").toLowerCase();
-            return value === "yes" || value === "maybe";
-          }).length;
-
           const reusePct = percent(reuseCount, total);
           const biometricPct = percent(biometricCount, total);
           const preferPct = percent(preferCount, total);
-          const trustPct = percent(trustCount, total);
-
-          const setText = (id, value) => {
-            const el = document.getElementById(id);
-            if (el) el.textContent = value;
-          };
-
-          const setWidth = (id, value) => {
-            const el = document.getElementById(id);
-            if (el) el.style.width = value + "%";
-          };
 
           setText("reuse-percent", reusePct);
           setText("biometric-percent", biometricPct);
           setText("prefer-percent", preferPct);
-          setText("trust-percent", trustPct);
 
           setText("reuse-bar-label", reusePct);
           setText("biometric-bar-label", biometricPct);
           setText("prefer-bar-label", preferPct);
-          setText("trust-bar-label", trustPct);
 
           setWidth("reuse-bar", numericPercent(reuseCount, total));
           setWidth("biometric-bar", numericPercent(biometricCount, total));
           setWidth("prefer-bar", numericPercent(preferCount, total));
-          setWidth("trust-bar", numericPercent(trustCount, total));
         })
         .catch((error) => {
-          console.error("Failed to load survey data:", error);
+          console.error("Failed to load original survey data:", error);
+        });
+
+      fetch(testerSurveyUrl)
+        .then((response) => response.text())
+        .then((csvText) => {
+          const data = parseCSV(csvText);
+          const total = data.length;
+
+          const easyColumn =
+            "How easy was it to load or access the BioBridge extension?";
+          const professionalColumn =
+            "The BioBridge interface looked professional and polished.";
+          const flowColumn = "The authentication flow was clear.";
+          const trustColumn =
+            "I would trust a system like BioBridge more if it clearly explained how biometric data is handled.";
+
+          const easyCount = data.filter((row) => {
+            const value = (row[easyColumn] || "").toLowerCase();
+            return value === "easy" || value === "very easy";
+          }).length;
+
+          const professionalCount = data.filter((row) => {
+            const value = (row[professionalColumn] || "").toLowerCase();
+            return value === "agree" || value === "strongly agree";
+          }).length;
+
+          const flowCount = data.filter((row) => {
+            const value = (row[flowColumn] || "").toLowerCase();
+            return value === "agree" || value === "strongly agree";
+          }).length;
+
+          const trustCount = data.filter((row) => {
+            const value = (row[trustColumn] || "").toLowerCase();
+            return value === "agree" || value === "strongly agree";
+          }).length;
+
+          const easyPct = percent(easyCount, total);
+          const professionalPct = percent(professionalCount, total);
+          const flowPct = percent(flowCount, total);
+          const trustPct = percent(trustCount, total);
+
+          setText("tester-easy-label", easyPct);
+          setText("tester-professional-label", professionalPct);
+          setText("tester-flow-label", flowPct);
+          setText("tester-trust-label", trustPct);
+          setText("tester-flow-percent", flowPct);
+
+          setWidth("tester-easy-bar", numericPercent(easyCount, total));
+          setWidth(
+            "tester-professional-bar",
+            numericPercent(professionalCount, total)
+          );
+          setWidth("tester-flow-bar", numericPercent(flowCount, total));
+          setWidth("tester-trust-bar", numericPercent(trustCount, total));
+        })
+        .catch((error) => {
+          console.error("Failed to load tester survey data:", error);
         });
     </script>
   </body>
